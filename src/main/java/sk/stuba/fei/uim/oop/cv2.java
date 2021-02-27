@@ -28,5 +28,42 @@ public class cv2 {
             System.out.println(pole[i]);
         }
     }
+
+    public static void zameni(int []pole, int i , int j){
+        int pomoc = pole[i];
+        pole[i] = pole[j];
+        pole[j] = pomoc;
+    }
+
+    public static int particion(int []niz , int an1 ,int an2){
+        int i,j;
+        j = an1;
+        for(i = an1+1;i<=an2;i++){
+            if(niz[i] <= niz[an1] ){
+                j++;
+                zameni(niz , j , i);
             }
+        }
+        zameni(niz , an1 , j);
+        return j;
+    }
+    public static void quicksort(int []niz , int an1 ,int an2){
+        if(an1 >= an2){
+            return ;
+        }
+        if(an1 + 1 == an2){
+            if(niz[an1] <  niz[an2]){
+                zameni(niz , an1 , an2);
+            }
+            return;
+        }
+
+        int zapamti = particion(niz , an1 , an2);
+        quicksort(niz , an1 ,zapamti-1);
+        quicksort(niz , zapamti+1 , an2);
+    }
+    public static void quick(int []niz){
+        quicksort(niz , 0 , niz.length - 1);
+    }
+}
 
